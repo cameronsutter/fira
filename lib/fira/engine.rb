@@ -2,12 +2,8 @@ module Fira
 
 	class Engine
 
-		@tag_pattern = /<.*>/
-		@id_pattern = /(#)([a-z_A-Z\-]+)/
-		@class_pattern = /\.([a-z_A-Z\-]+)/
-
-		#open the file and begin parsing it
-		def parse_file(contents)
+		#begin parsing text
+		def parse_text(contents)
 			
 			#find id's
 			result = parse_ids(contents)
@@ -18,20 +14,23 @@ module Fira
 		end
 
 		#scan for ids and replace with html id attributes
-		def parse_ids(string)
-			result = contents.gsub(@id_pattern, 'id="\2"')
+		def parse_ids(contents)
+			id_pattern = /(#)([a-z_A-Z\-]+)/
+			result = contents.gsub(id_pattern, 'id="\2"')
 		end
 
 		#scan for classes and create html class attributes
-		def parse_classes(string)
+		def parse_classes(contents)
 			
+			class_pattern = /\.([a-z_A-Z\-]+)/
+			tag_pattern = /<.*>/
 			result = contents
 			
 			#scan for classes
-			tags = contents.scan(@tag_pattern)
+			tags = contents.scan(tag_pattern)
 			tags.each do |tag|
 				
-				classes = tag.scan(@class_pattern)
+				classes = tag.scan(class_pattern)
 				
 				if ! classes.empty?
 				
@@ -48,7 +47,7 @@ module Fira
 					att = att.sub(/class=' /, "class='")
 					
 					#remove the eml class attributes
-					new_tag = tag.gsub(@class_pattern, "")
+					new_tag = tag.gsub(class_pattern, "")
 					
 					#save the html class attributes back into the tag
 					new_tag = new_tag.sub(/>/,att + "\\0")
