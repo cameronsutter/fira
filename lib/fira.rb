@@ -4,10 +4,11 @@ module Fira
 
   def self.render(template)
   	text = template.source
-  	logger.info "FIRA Render #{text}"
+  	#debug "FIRA Render #{text}"
+  	$stdout.puts "FIRA Render #{text}"
     @engine = Fira::Engine.new
     output = @engine.parse_text(text)
-    logger.info "FIRA Render #{output}"
+    #debug "FIRA Render #{output}"
     return output
   end
 

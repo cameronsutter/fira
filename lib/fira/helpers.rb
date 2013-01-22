@@ -3,21 +3,30 @@ require 'action_view/template'
 module Fira
 
   class FiraHandler
-      include Compilable
 
-      def initialize(template)
-        logger.info "initialize #{template.inspect}"
-        @template = template
+      def initialize
+        $stdout.puts "initialize"
       end
 
       def render(contents, local_assigns = {})
-        logger.info "RENDER #{contents}"
+        #debug "RENDER #{contents}"
         return Fira::render(contents)
       end
 
       def self.call(template)
-        logger.info "CALL #{template.inspect}"
-        return Fira::render(template)
+        new.call(template)
+      end
+
+      def call(template)
+        output = ''
+        add_preamble(output)
+        #debug "CALL #{template.inspect}"
+        txt = Fira::render(template)
+        $stdout.puts "result #{txt}"
+        add_text(output, txt)
+        add_postamble(output)
+
+        return output
       end
 
       #The next several methods are taken from the Erubis Template Handler erb.erb in action_view
