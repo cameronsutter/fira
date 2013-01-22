@@ -3,10 +3,11 @@ require "fira/version"
 module Fira
 
   def self.render(template)
-  	text = template.inspect
+  	text = template.source
+  	logger.info "FIRA Render #{text}"
     @engine = Fira::Engine.new
     output = @engine.parse_text(text)
-    debugger output
+    logger.info "FIRA Render #{output}"
     return output
   end
 
