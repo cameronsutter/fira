@@ -25,10 +25,10 @@ To use Fira, rename HTML files to .html.fi and rails will automatically handle t
 ##Examples
 
 ###Id's
-&lt;div #my_id&rt;
+&lt;div #my_id &rt;
 
 ###Classes
-&lt;div .multiple .classes&rt;
+&lt;div .multiple .classes &rt;
 
 ## Contributing
 
