@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Fira::VERSION
   gem.authors       = ["Cameron Sutter"]
   gem.email         = ["cameronsutter0@gmail.com"]
-  gem.description   = %q{Adds improvements to HTML syntax}
-  gem.summary       = %q{Smart HTML}
+  gem.description   = %q{Adds improvements to HTML syntax for id and class attributes}
+  gem.summary       = %q{Smarter HTML}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)

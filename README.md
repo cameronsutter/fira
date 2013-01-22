@@ -1,6 +1,8 @@
 # Fira
 
-TODO: Write a gem description
+##Description
+
+Fira adds ease-of-use functionality to HTML files. Instead of typing id="foo" or class="foo bar", you can simply type #foo or .foo .bar in HTML tags (in the normal place where you put id or class attributes)
 
 ## Installation
 
@@ -18,7 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use Fira, rename HTML files to .html.fi and rails will automatically handle them.
+
+##Examples
+
+###Id's
+&lt;div #my_id&rt;
+
+###Classes
+&lt;div .multiple .classes&rt;
 
 ## Contributing
 
