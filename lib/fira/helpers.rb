@@ -5,11 +5,10 @@ module Fira
   class FiraHandler
 
       def initialize
-        $stdout.puts "initialize"
+        
       end
 
       def render(contents, local_assigns = {})
-        #debug "RENDER #{contents}"
         return Fira::render(contents)
       end
 
@@ -20,9 +19,7 @@ module Fira
       def call(template)
         output = ''
         add_preamble(output)
-        #debug "CALL #{template.inspect}"
         txt = Fira::render(template)
-        $stdout.puts "result #{txt}"
         add_text(output, txt)
         add_postamble(output)
 
@@ -59,6 +56,10 @@ module Fira
 
       def add_postamble(src)
         src << '@output_buffer.to_s'
+      end
+
+      def escape_text(text)
+        text.gsub(/['\\]/, '\\\\\&')   # "'" => "\\'",   '\\' => '\\\\'
       end
   end
   handler_klass = Fira::FiraHandler
