@@ -35,33 +35,36 @@ module Fira
 
 				open_tag = tag.scan(OPEN_TAG_PATTERN)
 
-				classes = open_tag[0][0].scan(CLASS_PATTERN)
+				if ! open_tag.empty?
 
-				if ! classes.empty?
-				
-					#build a class attribute
-					att = "class='"
-				
-					classes.each do |cl|
-						att += " #{cl[0]}"
+					classes = open_tag[0][0].scan(CLASS_PATTERN)
+
+					if ! classes.empty?
+					
+						#build a class attribute
+						att = "class='"
+					
+						classes.each do |cl|
+							att += " #{cl[0]}"
+						end
+						
+						att += "'"
+						
+						#remove the space before the first class
+						att = att.sub(/class=' /, "class='")
+						
+						#remove the fira class attributes
+						new_open_tag = open_tag[0][0].gsub(CLASS_PATTERN, "")
+
+						#save the html class attributes back into the tag
+						new_open_tag = new_open_tag.sub(/>/,att + "\\0")
+						
+						#replace the old opening tag with the new
+						new_tag = tag.gsub(OPEN_TAG_PATTERN, new_open_tag + '\2')
+						
+						#save the whole html tag back into the file
+						result = result.sub(tag, new_tag)
 					end
-					
-					att += "'"
-					
-					#remove the space before the first class
-					att = att.sub(/class=' /, "class='")
-					
-					#remove the fira class attributes
-					new_open_tag = open_tag[0][0].gsub(CLASS_PATTERN, "")
-
-					#save the html class attributes back into the tag
-					new_open_tag = new_open_tag.sub(/>/,att + "\\0")
-					
-					#replace the old opening tag with the new
-					new_tag = tag.gsub(OPEN_TAG_PATTERN, new_open_tag + '\2')
-					
-					#save the whole html tag back into the file
-					result = result.sub(tag, new_tag)
 				end
 			end
 			
