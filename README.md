@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-To use Fira, rename HTML files to .html.fi and rails will automatically handle them. It will even evaluate embedded ruby code using Erubis. (note: Erubis runs after Fira)
+To use Fira, rename HTML files to .html.fira and rails will automatically handle them. It will even evaluate embedded ruby code using Erubis. (note: Erubis runs after Fira)
 
 ##Examples
 

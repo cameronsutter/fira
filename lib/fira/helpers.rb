@@ -26,6 +26,7 @@ module Fira
       end
 
   end
+  #register as default template handler
   handler_klass = Fira::FiraHandler
-  ActionView::Template::register_default_template_handler :fi, handler_klass
+  ActionView::Template::register_default_template_handler :fira, handler_klass
 end

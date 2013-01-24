@@ -12,3 +12,4 @@ end
 
 require 'fira/engine'
 require 'fira/helpers'
+require 'fira/fira-rails'
