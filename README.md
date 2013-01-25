@@ -2,7 +2,9 @@
 
 ##Description
 
-Fira adds ease-of-use functionality to HTML files. Instead of typing id="foo" or class="foo bar", you can simply type #foo or .foo .bar in HTML tags (in the normal place where you put id or class attributes)
+Fira adds ease-of-use functionality to HTML files. 
+
+Instead of typing id="foo" or class="foo bar", you can simply type #foo or .foo .bar in HTML tags (in the normal place where you put id or class attributes)
 
 ## Installation
 
@@ -21,6 +23,8 @@ Or install it yourself as:
 ## Usage
 
 To use Fira, rename HTML files to .html.fira and rails will automatically handle them. It will even evaluate embedded ruby code using Erubis. (note: Erubis runs after Fira)
+
+Once in your Gemfile, Fira will be the default template_engine for <code>rails generate</code>, which means that view files that are normally .html.erb will now be .html.fira files.
 
 ##Examples
 
