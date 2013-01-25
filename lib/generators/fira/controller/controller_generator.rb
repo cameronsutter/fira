@@ -1,19 +1,16 @@
 require 'rails/generators/erb/controller/controller_generator'
-require 'rails/generators/erb/scaffold/scaffold_generator'
 
 module Fira
   module Generators
-
-    class MailerGenerator < ControllerGenerator
+    class ControllerGenerator < Erb::Generators::ControllerGenerator
       source_root File.expand_path("../templates", __FILE__)
 
     protected
 
-      def format
-        :text
+      def handler
+        :fira
       end
 
     end
-
   end
 end

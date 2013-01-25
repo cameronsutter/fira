@@ -1,5 +1,4 @@
-require 'rails/generators/erb/controller/controller_generator'
-require 'rails/generators/erb/scaffold/scaffold_generator'
+require 'generators/fira/controller/controller_generator'
 
 module Fira
   module Generators
