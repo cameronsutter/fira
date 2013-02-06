@@ -2,9 +2,9 @@ module Fira
 
 	class Engine
 
-		ID_PATTERN = /(<[^\/]*)#([a-z_A-Z\-]+)/
+		ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)/
 		CLASS_PATTERN = /\.([a-z_A-Z\-]+)/
-		TAG_PATTERN = /<[^\/]*>/
+		TAG_PATTERN = /<[^\/]?.*>/
 
 		#begin parsing text
 		def parse_text(contents)

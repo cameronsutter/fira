@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-ID_PATTERN = /(<.*)#([a-z_A-Z\-]+)(.*>.*<\/.*>)/
+ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)/
 CLASS_PATTERN = /\.([a-z_A-Z\-]+)/
-TAG_PATTERN = /<.*>/
-OPEN_TAG_PATTERN = /(<.*>)(.*<\/.*>)/
+TAG_PATTERN = /<[^\/]?.*>/
 
 #begin parsing text
 def parse_text(contents)
@@ -19,7 +18,7 @@ end
 #scan for ids and replace with html id attributes
 def parse_ids(contents)
 
-	result = contents.gsub(ID_PATTERN, '\1 id="\2" \3')
+	result = contents.gsub(ID_PATTERN, '\1 id="\2"')
 end
 
 #scan for classes and create html class attributes
@@ -31,9 +30,8 @@ def parse_classes(contents)
 	tags = contents.scan(TAG_PATTERN)
 	tags.each do |tag|
 
-		open_tag = tag.scan(OPEN_TAG_PATTERN)
+		classes = tag.scan(CLASS_PATTERN)
 
-		classes = open_tag[0][0].scan(CLASS_PATTERN)
 
 		if ! classes.empty?
 		
@@ -50,14 +48,11 @@ def parse_classes(contents)
 			att = att.sub(/class=' /, "class='")
 			
 			#remove the fira class attributes
-			new_open_tag = open_tag[0][0].gsub(CLASS_PATTERN, "")
+			new_tag = tag.gsub(CLASS_PATTERN, "")
 
 			#save the html class attributes back into the tag
-			new_open_tag = new_open_tag.sub(/>/,att + "\\0")
-			
-			#replace the old opening tag with the new
-			new_tag = tag.gsub(OPEN_TAG_PATTERN, new_open_tag + '\2')
-			
+			new_tag = new_tag.sub(/>/,att + "\\0")
+							
 			#save the whole html tag back into the file
 			result = result.sub(tag, new_tag)
 		end
@@ -80,15 +75,11 @@ files.each do |fi|
 	File.open(fi, 'r+'){
 		|f|
 		contents = f.read
-
-		tag_pattern = /<.*>/
 		
-		result = parse_ids(contents)
-		
-		result = parse_classes(result, tag_pattern)
+		result = parse_text(contents)
 		
 		#make the new file's name
-		new_file = fi.sub(/(\.fi$|\.html.fi$)/, ".html")
+		new_file = fi.sub(/(\.fira$|\.html.fira$)/, ".html")
 		
 		File.open(new_file, "w") { |nf| nf.write(result)}
 	}
