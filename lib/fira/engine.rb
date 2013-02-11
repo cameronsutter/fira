@@ -48,12 +48,13 @@ module Fira
 					
 					#remove the space before the first class
 					att = att.sub(/class=' /, "class='")
-					
-					#remove the fira class attributes
-					new_tag = tag.gsub(CLASS_PATTERN, "")
 
-					#save the html class attributes back into the tag
-					new_tag = new_tag.sub(/>/,att + "\\0")
+					#remove the fira class attributes
+					#first one
+					new_tag = tag.sub(CLASS_PATTERN, att)
+					
+					#the rest of the fira class attributes
+					new_tag = new_tag.gsub(CLASS_PATTERN, "")
 									
 					#save the whole html tag back into the file
 					result = result.sub(tag, new_tag)
