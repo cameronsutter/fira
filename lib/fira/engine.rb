@@ -4,7 +4,7 @@ module Fira
 
 		ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)/
 		CLASS_PATTERN = /\.([a-z_A-Z\-]+)/
-		TAG_PATTERN = /<[^\/]?.*>/
+		TAG_PATTERN = /<\/?\w+\s+[^>]*>/
 
 		#begin parsing text
 		def parse_text(contents)
