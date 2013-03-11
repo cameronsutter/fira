@@ -25,7 +25,7 @@ module Fira
     protected
 
       def available_views
-        %w(index edit show new)
+        %w(index edit show new _form)
       end
 
       def handler
