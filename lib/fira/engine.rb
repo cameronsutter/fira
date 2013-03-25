@@ -2,7 +2,7 @@ module Fira
 
 	class Engine
 
-		ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)/
+		ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)(.*>.*<\/.*>)/
 		CLASS_PATTERN = /\.([a-z_A-Z\-]+)/
 		TAG_PATTERN = /<\/?\w+\s+[^>]*>/
 
@@ -20,7 +20,7 @@ module Fira
 		#scan for ids and replace with html id attributes
 		def parse_ids(contents)
 
-			result = contents.gsub(ID_PATTERN, '\1 id="\2"')
+			result = contents.gsub(ID_PATTERN, '\1 id="\2" \3')
 		end
 
 		#scan for classes and create html class attributes
