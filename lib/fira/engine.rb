@@ -2,66 +2,51 @@ module Fira
 
 	class Engine
 
-		ID_PATTERN = /(<[^\/]?.*)#([a-z_A-Z\-]+)(.*>.*<\/.*>)/
-		CLASS_PATTERN = /\.([a-z_A-Z\-]+)/
-		TAG_PATTERN = /<\/?\w+\s+[^>]*>/
 
-		#begin parsing text
-		def parse_text(contents)
-			
-			#find id's
-			result = parse_ids(contents)
-			
-			#find classes
-			output = parse_classes(result)
-				
-		end
+		ID_REGEX = /([^'%"]*)#([a-z_A-Z\-]+)(.*)/
+		CLASS_REGEX = /[^'%"]*\.([a-z_A-Z\-]+).*/
 
-		#scan for ids and replace with html id attributes
-		def parse_ids(contents)
+		def parse_text(text)
+			output = ""
+			tokenizer = HTML::Tokenizer.new(text)
+			while token = tokenizer.next
+				if token[0] == "<" and token[token.length - 1] == ">" and token[1] != "/"
+					#if it's an opening tag, analyze it
 
-			result = contents.gsub(ID_PATTERN, '\1 id="\2" \3')
-		end
+					#find and replace fira ID attributes
+					result = token.sub(ID_REGEX, '\1 id="\2" \3')
 
-		#scan for classes and create html class attributes
-		def parse_classes(contents)
+					#find fira class attributes
+					classes = result.scan(CLASS_REGEX)
 
-			result = contents
-			
-			#scan for classes
-			tags = contents.scan(TAG_PATTERN)
-			tags.each do |tag|
+					if ! classes.empty?
+					
+						#build an HTML class attribute
+						att = "class='"
+					
+						classes.each do |cl|
+							att += " #{cl[0]}"
+						end
+						
+						att += "'"
+						
+						#remove the space before the first class
+						att = att.sub(/class=' /, "class='")
 
-				classes = tag.scan(CLASS_PATTERN)
-
-
-				if ! classes.empty?
-				
-					#build a class attribute
-					att = "class='"
-				
-					classes.each do |cl|
-						att += " #{cl[0]}"
+						#remove the fira class attributes
+						#first one
+						new_tag = result.sub(CLASS_REGEX, att)
+						
+						#the rest of the fira class attributes
+						output += new_tag.gsub(CLASS_REGEX, "")
 					end
-					
-					att += "'"
-					
-					#remove the space before the first class
-					att = att.sub(/class=' /, "class='")
 
-					#remove the fira class attributes
-					#first one
-					new_tag = tag.sub(CLASS_PATTERN, att)
-					
-					#the rest of the fira class attributes
-					new_tag = new_tag.gsub(CLASS_PATTERN, "")
-									
-					#save the whole html tag back into the file
-					result = result.sub(tag, new_tag)
+				else
+					output += token
 				end
 			end
-			
-			return result
+
+			return output
 		end
 		
 	end
