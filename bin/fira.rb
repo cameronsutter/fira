@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-ID_REGEX = /([^'%"]*)#([a-z_A-Z\-]+)(.*)/
-CLASS_REGEX = /[^'%"]*\.([a-z_A-Z\-]+).*/
+ID_REGEX = /([^'"]*)#([a-z_A-Z\-]+)(.*)/
+CLASS_REGEX = / \.([a-z_A-Z\-]+)/
 
 def parse_text(text)
 	output = ""
@@ -19,23 +19,26 @@ def parse_text(text)
 			if ! classes.empty?
 			
 				#build an HTML class attribute
-				att = "class='"
+				att = 'class="'
 			
 				classes.each do |cl|
 					att += " #{cl[0]}"
 				end
 				
-				att += "'"
+				att += '"'
 				
 				#remove the space before the first class
-				att = att.sub(/class=' /, "class='")
+				att = att.sub(/class=" /, ' class="')
 
-				#remove the fira class attributes
-				#first one
+				#remove the first fira class attribute
 				new_tag = result.sub(CLASS_REGEX, att)
 				
-				#the rest of the fira class attributes
-				output += new_tag.gsub(CLASS_REGEX, "")
+				#remove the rest of the fira class attributes
+				final_result = new_tag.gsub(CLASS_REGEX, "")
+
+				output += final_result
+			else
+				output += result
 			end
 
 		else
