@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-ID_REGEX = /([^'"]*)#([a-z_A-Z\-]+)(.*)/
+ID_REGEX = / #([a-z_A-Z\-]+)/
 CLASS_REGEX = / \.([a-z_A-Z\-]+)/
 
 def parse_text(text)
@@ -10,8 +10,8 @@ def parse_text(text)
 		if token[0] == "<" and token[token.length - 1] == ">" and token[1] != "/"
 			#if it's an opening tag, analyze it
 
-			#find and replace fira ID attributes
-			result = token.sub(ID_REGEX, '\1 id="\2" \3')
+			#find and replace fira ID attribute
+			result = token.sub(ID_REGEX, ' id="\1"')
 
 			#find fira class attributes
 			classes = result.scan(CLASS_REGEX)
