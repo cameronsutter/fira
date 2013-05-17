@@ -1,4 +1,5 @@
-require 'action_view/template'
+require 'active_support'
+require 'action_view'
 require 'erubis'
 
 module Fira
