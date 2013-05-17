@@ -30,19 +30,19 @@ Once in your Gemfile, Fira will be the default template_engine for <code>rails g
 
 ###Id's
 
-    &lt;div #my_id &gt;
+    <div #my_id >
 
-    becomes
+becomes
 
-    &lt;div id="my_id" &gt;
+    <div id="my_id" >
 
 ###Classes
 
-    &lt;div .multiple .classes &gt;
+    <div .multiple .classes >
 
-    becomes
+becomes
 
-    &lt;div class='multiple classes' &gt;
+    <div class='multiple classes' >
 
 ## Contributing
 
