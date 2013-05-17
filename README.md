@@ -4,7 +4,7 @@
 
 Fira adds ease-of-use functionality to HTML files. 
 
-Instead of typing id="foo" or class="foo bar", you can simply type #foo or .foo .bar in HTML tags (in the normal place where you put id or class attributes)
+Instead of typing `id="foo"` or `class="foo bar"`, you can simply type `#foo` or `.foo .bar` in HTML tags (in the normal place where you put id or class attributes)
 
 ## Installation
 
