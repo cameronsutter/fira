@@ -8,7 +8,7 @@ module Fira
 		ID_REGEX = / #([^0-9][a-z_A-Z0-9_\-]+)/
 		CLASS_REGEX = / \.([^0-9][a-z_A-Z0-9_\-]+)/
 		QUOTE_REGEX = /\S+=["']?(?:.(?!["']?\s+(?:\S+)=|[>"']))+.["']?/
-		TAG_OPEN_REGEX = /<[^\/%]\w* /
+		TAG_OPEN_REGEX = /<[^\/%!]\w* /
 		TAG_END_REGEX = /([\/]?>)/
 
 		def parse_text(text)
@@ -75,7 +75,7 @@ module Fira
 
 		def is_opening_tag?(text)
 			val = text =~ TAG_OPEN_REGEX
-			val ? true : false
+			val.nil? || val > 0 ? false : true
 		end
 
 

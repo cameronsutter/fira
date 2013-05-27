@@ -120,6 +120,32 @@ def res_inside_quotes
   FIRA
 end
 
+def html_comments
+  <<-FIRA
+    <div class="span12">
+      <h1><%= @applicant.first_name + " " + @applicant.last_name %>, you are applying for: </h1>
+      <h3><span .main-color><%= @position.name %></span> @ <%= @position.client.name %></h3>
+  <!--  <div .user-info>
+        <h2><a href="/dashboard"><%= @applicant.first_name + " " + @applicant.last_name %></a></h2>
+        <button type="button" .button .edit-profile>Edit</button>
+      </div> -->
+    </div>
+  FIRA
+end
+
+def res_html_comments
+  <<-FIRA
+    <div  class="span12">
+      <h1><%= @applicant.first_name + " " + @applicant.last_name %>, you are applying for: </h1>
+      <h3><span class="main-color"><%= @position.name %></span> @ <%= @position.client.name %></h3>
+  <!--  <div .user-info>
+        <h2><a href="/dashboard"><%= @applicant.first_name + " " + @applicant.last_name %></a></h2>
+        <button type="button" .button .edit-profile>Edit</button>
+      </div> -->
+    </div>
+  FIRA
+end
+
 def erb
   <<-FIRA
     <span #my-id><% something.id %></span>

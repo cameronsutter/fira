@@ -38,6 +38,10 @@ describe Fira do
       result.should == res_inside_quotes
     end
 
+    it 'comments' do
+      result = Fira.render html_comments
+      result.should == res_html_comments
+    end
   end
 
   context 'ERB' do
