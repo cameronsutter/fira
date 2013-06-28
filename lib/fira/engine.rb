@@ -26,37 +26,14 @@ module Fira
 					#find and replace fira ID attributes
 					result = no_quotes.sub(ID_REGEX, ' id="\1"')
 
-					#find fira class attributes
-					classes = result.scan(CLASS_REGEX)
+					#find and replace fira class attributes
+					result = parse_classes(result)
 
-					if ! classes.empty?
+					#add back in the quotes
+					output += insert_quotes(quotes, result)
 
-						#build an HTML class attribute
-						att = 'class="'
-
-						classes.each do |cl|
-							att += " #{cl[0]}"
-						end
-
-						att += '"'
-
-						#remove the space before the first class
-						att = att.sub(/class=" /, ' class="')
-
-						#remove the first fira class attribute
-						new_tag = result.sub(CLASS_REGEX, att)
-
-						#remove the rest of the fira class attributes
-						final_result = new_tag.gsub(CLASS_REGEX, "")
-
-						#add back in the quotes
-						final = insert_quotes(quotes, final_result)
-					else
-						#add back in the quotes
-						final = insert_quotes(quotes, result)
-					end
-
-					output += final
+					#find and replace fira data attributes
+					output = output.gsub("\$", "data-")
 
 				else
 					output += token
@@ -64,6 +41,30 @@ module Fira
 			end
 
 			return output
+		end
+
+		def parse_classes(text)
+			#find fira class attributes
+			classes = text.scan(CLASS_REGEX)
+
+			if classes.empty?
+				return text
+			end
+
+			#build an HTML class attribute
+			att = 'class="'
+
+			classes.each do |cl|
+				att += " #{cl[0]}"
+				text = text.sub(" ." + cl[0], "")
+			end
+
+			att += '"'
+
+			#remove the space before the first class
+			att = att.sub(/class=" /, ' class="')
+
+			text.sub(TAG_END_REGEX, att + '\1')
 		end
 
 		def insert_quotes(_quotes, tag)

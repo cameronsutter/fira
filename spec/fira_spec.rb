@@ -42,6 +42,13 @@ describe Fira do
       result = Fira.render html_comments
       result.should == res_html_comments
     end
+
+    context 'Data tags' do
+      it 'simple data tags' do
+        result = Fira.render data_attribute_simple
+        result.should == res_data_attribute_simple
+      end
+    end
   end
 
   context 'ERB' do
@@ -55,4 +62,5 @@ describe Fira do
       result.should == res_erb_in_tag
     end
   end
+
 end

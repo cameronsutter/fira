@@ -81,7 +81,7 @@ def res_nested_multi_line
     <p id="id" class="class3">
       <span id="span8" class="one">some text</span>
       some text
-      <input  id="user"  class="orange"  type='text' value='user'/>
+      <input  id="user"   class="orange" type='text' value='user'/>
     </p>
   FIRA
 end
@@ -158,7 +158,7 @@ end
 def res_erb
   <<-FIRA
     <span id="my-id"><% something.id %></span>
-    <p id="id" class="class3" >
+    <p id="id"  class="class3">
       some text
     </p>
   FIRA
@@ -176,8 +176,20 @@ end
 def res_erb_in_tag
   <<-FIRA
     <span id="my-id"  class="<%= something.id %>" ></span>
-    <p id="id" class="class3" >
+    <p id="id"  class="class3">
       some text
     </p>
+  FIRA
+end
+
+def data_attribute_simple
+  <<-FIRA
+    <span $convo-id="72" ></span>
+  FIRA
+end
+
+def res_data_attribute_simple
+  <<-FIRA
+    <span   data-convo-id="72"></span>
   FIRA
 end
