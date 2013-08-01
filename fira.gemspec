@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["cameronsutter0@gmail.com"]
   gem.description   = %q{Adds improvements to HTML syntax for id and class attributes}
   gem.summary       = %q{Smarter HTML}
-  gem.homepage      = "https://github.com/cameronsutter/fira"
+  gem.homepage      = "http://cameronsutter.github.io/fira"
 
   gem.add_dependency "activesupport", [">= 3.1", "< 4.1"]
   gem.add_dependency "actionpack",    [">= 3.1", "< 4.1"]

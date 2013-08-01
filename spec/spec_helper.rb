@@ -193,3 +193,15 @@ def res_data_attribute_simple
     <span   data-convo-id="72"></span>
   FIRA
 end
+
+def data_attribute_multiple
+  <<-FIRA
+    <span $convo-id="72" $city="Provo" ></span>
+  FIRA
+end
+
+def res_data_attribute_multiple
+  <<-FIRA
+    <span    data-convo-id="72" data-city="Provo"></span>
+  FIRA
+end

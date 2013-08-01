@@ -48,6 +48,11 @@ describe Fira do
         result = Fira.render data_attribute_simple
         result.should == res_data_attribute_simple
       end
+
+      it 'multiple data tags' do
+        result = Fira.render data_attribute_multiple
+        result.should == res_data_attribute_multiple
+      end
     end
   end
 
