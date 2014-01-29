@@ -1,70 +1,19 @@
 require 'spec_helper'
+require 'html_specs'
+require 'erb_specs'
 
 describe Fira do
-  context 'HTML' do
+  specs = %w{
+    simple multi_line nested_single_line nested_multi_line two_classes
+    inside_text inside_quotes html_comments data_attribute_simple
+    data_attribute_multiple erb erb_in_tag multiline_opening_tag
+  }
 
-    it 'simple' do
-      result = Fira.render simple
-      result.should == res_simple
-    end
-
-    it 'multi line' do
-      result = Fira.render multi_line
-      result.should == res_multi_line
-    end
-
-    it 'nested single line' do
-      result = Fira.render nested_single_line
-      result.should == res_nested_single_line
-    end
-
-    it 'nested multi line' do
-      result = Fira.render nested_multi_line
-      result.should == res_nested_multi_line
-    end
-
-    it 'two classes' do
-      result = Fira.render two_classes
-      result.should == res_two_classes
-    end
-
-    it 'inside text' do
-      result = Fira.render inside_text
-      result.should == res_inside_text
-    end
-
-    it 'inside quotes' do
-      result = Fira.render inside_quotes
-      result.should == res_inside_quotes
-    end
-
-    it 'comments' do
-      result = Fira.render html_comments
-      result.should == res_html_comments
-    end
-
-    context 'Data tags' do
-      it 'simple data tags' do
-        result = Fira.render data_attribute_simple
-        result.should == res_data_attribute_simple
-      end
-
-      it 'multiple data tags' do
-        result = Fira.render data_attribute_multiple
-        result.should == res_data_attribute_multiple
-      end
-    end
-  end
-
-  context 'ERB' do
-    it 'simple erb' do
-      result = Fira.render erb
-      result.should == res_erb
-    end
-
-    it 'erb in-tag' do
-      result = Fira.render erb_in_tag
-      result.should == res_erb_in_tag
+  specs.each do |method_name|
+    it "#{method_name}" do
+      result = Fira.render(send(method_name))
+      res_name = "res_#{method_name}"
+      result.should == send(res_name).gsub( /\s+/, " " )
     end
   end
 

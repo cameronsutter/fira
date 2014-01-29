@@ -8,7 +8,7 @@ module Fira
 		ID_REGEX = / #([^0-9][a-z_A-Z0-9_\-]+)/
 		CLASS_REGEX = / \.([^0-9][a-z_A-Z0-9_\-]+)/
 		QUOTE_REGEX = /\S+=["']?(?:.(?!["']?\s+(?:\S+)=|[>"']))+.["']?/
-		TAG_OPEN_REGEX = /<[^\/%!]\w* /
+		TAG_OPEN_REGEX = /<[^\/%!]\w* /x
 		TAG_END_REGEX = /([\/]?>)/
 
 		def parse_text(text)
@@ -40,7 +40,7 @@ module Fira
 				end
 			end
 
-			return output
+			return output.gsub( /\s+/, " " )
 		end
 
 		def parse_classes(text)
