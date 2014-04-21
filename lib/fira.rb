@@ -3,9 +3,8 @@ require "fira/version"
 module Fira
 
   def self.render(source)
-    @engine = Fira::Engine.new
-    output = @engine.parse_text(source)
-    return output
+    engine = Fira::Engine.new(source)
+    engine.parse_text
   end
 
 end

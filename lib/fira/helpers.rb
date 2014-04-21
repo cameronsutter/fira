@@ -7,7 +7,7 @@ module Fira
   class FiraHandler
 
       def initialize
-        
+
       end
 
       def render(contents, local_assigns = {})
